@@ -8,7 +8,7 @@ import {
 function MyApp({ Component, pageProps }) {
   const livepeerClient = createReactClient({
     provider: studioProvider({
-      apiKey: "0a2ca3b9-3154-4754-a310-633063161c8b",
+      apiKey: "2cfa4490-fc5d-40fa-bbfa-93805f664183",
     }),
   });
 
