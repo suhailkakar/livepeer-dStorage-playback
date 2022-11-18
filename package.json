@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@livepeer/react": "^1.5.2",
+    "@livepeer/react": "1.5.3",
     "autoprefixer": "^10.4.13",
     "next": "13.0.3",
     "postcss": "^8.4.19",
