@@ -41,15 +41,26 @@ export default function Home() {
           </p>
           <div className="flex flex-row ">
             {videos.map((video, index) => (
-              <img
-                key={video.id}
-                onClick={() => {
-                  setTitle(video.title);
-                  setUrl(video.url);
-                }}
-                className="w-18 h-16 ml-4 rounded-md  border-gray-100 hover:-translate-y-1 hover:shadow-lg cursor-pointer transition-all duration-200 mt-4 lg:mt-0"
-                src={video.thumbnail}
-              />
+              <div key={index} className="relative">
+                <img
+                  onClick={() => {
+                    setTitle(video.title);
+                    setUrl(video.url);
+                  }}
+                  className="w-18 h-16 ml-4 rounded-md  border-gray-100 hover:-translate-y-1 hover:shadow-lg cursor-pointer transition-all duration-200 mt-4 lg:mt-0"
+                  src={video.thumbnail}
+                />
+                <div className="absolute top-0 right-0 m-1 font-semibold border border-white bg-white rounded-full">
+                  <img
+                    className="w-4 h-4 rounded-full"
+                    src={
+                      video.storageType === "ipfs"
+                        ? "logos/ipfs.png"
+                        : "logos/arweave.png"
+                    }
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
