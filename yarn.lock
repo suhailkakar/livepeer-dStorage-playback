@@ -51,10 +51,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@livepeer/react@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@livepeer/react/-/react-1.5.2.tgz#d1b1008c097d3e608aaaa1ad64b41b8c99949b0c"
-  integrity sha512-emdS+LvZXCfk3/Wcu6poEFHO2ZrjDR+wHFXDhM51qeOwSgJdUPgb/gfcByVeIp759OfSm/u4vtwrA9XpUiITtQ==
+"@livepeer/react@1.5.3":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@livepeer/react/-/react-1.5.3.tgz#969881583bbcd28c29a53155cfd95dc88fca83dd"
+  integrity sha512-WKl+njmJlpF9Z2+Kr04jgsv+NPFdtYkb83A38QaBThhFZpEFPafGubcTf2yKb3f5c7OdzeiK6mgdhqZFRv9Uxw==
   dependencies:
     "@stitches/react" "^1.2.8"
     "@tanstack/query-core" "^4.14.1"

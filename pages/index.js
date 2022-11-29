@@ -7,8 +7,7 @@ import videos from "../data/sample-data.json";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-
-  const idParsed = useMemo(() => parseCid(url) ?? parseArweaveTxId(url), [url]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -45,7 +44,12 @@ export default function Home() {
                 <img
                   onClick={() => {
                     setTitle(video.title);
-                    setUrl(video.url);
+                    setUrl(null);
+                    setLoading(true);
+                    setTimeout(() => {
+                      setUrl(video.url);
+                      setLoading(false);
+                    }, 1000);
                   }}
                   className="w-18 h-16 ml-4 rounded-md  border-gray-100 hover:-translate-y-1 hover:shadow-lg cursor-pointer transition-all duration-200 mt-4 lg:mt-0"
                   src={video.thumbnail}
@@ -65,23 +69,25 @@ export default function Home() {
           </div>
         </div>
 
-        {url && !idParsed && (
-          <p className="mt-4 text-red-500">
-            Provided value is not a valid identifier.
-          </p>
-        )}
-        {idParsed && (
-          <div className="mt-8 w-[90%] lg:w-[40%]">
+        <div className="mt-8 w-[90%] lg:w-[40%]">
+          {url && (
             <Player
-              title={title || idParsed.id}
+              title={title || url}
               src={url}
               autoPlay
               muted
               showPipButton
-              autoUrlUpload
             />
-          </div>
-        )}
+          )}
+          {loading && (
+            <div className="flex flex-col justify-center mt-8 items-center">
+              <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-[#19BC75]" />
+              <p className="text-xl font-medium text-slate-800 mt-4">
+                Loading...
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
