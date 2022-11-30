@@ -10,7 +10,7 @@ import {
 
 const livepeerClient = createReactClient({
   provider: studioProvider({
-    apiKey: null,
+    apiKey: process.env.REACT_APP_LIVEPEER_API_KEY,
   }),
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
