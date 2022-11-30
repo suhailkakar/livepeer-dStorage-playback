@@ -6,7 +6,7 @@ export default function Nav() {
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex-shrink-0">
-            <img src="logo.png" alt="logo" className="w-1/2" />
+            <img src="logos/livepeer-2.png" alt="logo" className="w-1/2" />
           </div>
           <div className="hidden lg:flex lg:ml-10 xl:ml-16 lg:items-center lg:justify-center lg:space-x-8 xl:space-x-16">
             <a
