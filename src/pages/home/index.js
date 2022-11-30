@@ -1,13 +1,14 @@
 import { Player } from "@livepeer/react";
 import { parseArweaveTxId, parseCid } from "livepeer/media";
 import { useMemo, useState } from "react";
-import Nav from "../components/Navbar";
-import videos from "../data/sample-data.json";
+import { Nav } from "../../components";
+import videos from "../../data/sample-data.json";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const idParsed = useMemo(() => parseCid(url) ?? parseArweaveTxId(url), [url]);
 
   return (
     <div>
@@ -44,12 +45,7 @@ export default function Home() {
                 <img
                   onClick={() => {
                     setTitle(video.title);
-                    setUrl(null);
-                    setLoading(true);
-                    setTimeout(() => {
-                      setUrl(video.url);
-                      setLoading(false);
-                    }, 1000);
+                    setUrl(video.url);
                   }}
                   className="w-18 h-16 ml-4 rounded-md  border-gray-100 hover:-translate-y-1 hover:shadow-lg cursor-pointer transition-all duration-200 mt-4 lg:mt-0"
                   src={video.thumbnail}
@@ -69,25 +65,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-8 w-[90%] lg:w-[40%]">
-          {url && (
+        {url && !idParsed && (
+          <p className="mt-4 text-red-500">
+            Provided value is not a valid identifier.
+          </p>
+        )}
+        {idParsed && (
+          <div className="mt-8 w-[90%] lg:w-[40%]">
             <Player
-              title={title || url}
+              title={title || idParsed.id}
               src={url}
               autoPlay
               muted
               showPipButton
+              autoUrlUpload
             />
-          )}
-          {loading && (
-            <div className="flex flex-col justify-center mt-8 items-center">
-              <div className="animate-spin rounded-full h-24 w-24 border-b-2 border-[#19BC75]" />
-              <p className="text-xl font-medium text-slate-800 mt-4">
-                Loading...
-              </p>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
