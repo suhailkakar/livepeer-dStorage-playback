@@ -1,6 +1,6 @@
 import { Player } from "@livepeer/react";
-import { parseArweaveTxId, parseCid } from "livepeer/media";
-import { useMemo, useState } from "react";
+import mux from "mux-embed";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Nav } from "../../components";
 import videos from "../../data/sample-data.json";
 
@@ -8,8 +8,28 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [playerRef, setPlayerRef] = useState();
 
-  const idParsed = useMemo(() => parseCid(url) ?? parseArweaveTxId(url), [url]);
+  const mediaElementRef = useCallback((ref) => {
+    setPlayerRef(ref);
+  }, []);
+
+  useEffect(() => {
+    if (playerRef) {
+      const initTime = mux.utils.now();
+
+      mux.monitor(playerRef, {
+        debug: false,
+        data: {
+          env_key: process.env.REACT_APP_MUX_ENV_KEY,
+          player_name: "dStorage Sample App - Player",
+          player_init_time: initTime,
+          video_id: url,
+          video_title: title,
+        },
+      });
+    }
+  }, [playerRef]);
 
   return (
     <div>
@@ -85,6 +105,7 @@ export default function Home() {
               autoPlay
               muted
               showPipButton
+              mediaElementRef={mediaElementRef}
             />
           )}
           {loading && (
