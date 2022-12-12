@@ -15,6 +15,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_MUX_ENV_KEY, "mux env key");
     if (playerRef) {
       const initTime = mux.utils.now();
 
